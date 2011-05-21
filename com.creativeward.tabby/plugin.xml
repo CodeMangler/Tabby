@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="com.creativeward.tabby.tabSwitch"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="Ctrl+Tab">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.eclipse.ui.category.window"
+            defaultHandler="com.creativeward.tabby.commands.TabSwitchHandler"
+            description="Switches to the last used tab, or, when held, displays a window that lists the current tabs to switch to."
+            id="com.creativeward.tabby.tabSwitch"
+            name="Switch Tab"
+            returnTypeId="org.eclipse.jdt.ui.commands.javaElementReference">
+      </command>
+   </extension>
+
+</plugin>

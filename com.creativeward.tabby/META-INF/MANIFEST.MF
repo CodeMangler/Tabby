@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tabby
+Bundle-SymbolicName: com.creativeward.tabby;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.creativeward.tabby.Activator
+Bundle-Vendor: Creative Ward
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Export-Package: com.creativeward.tabby.ui.dialogs,
+ com.creativeward.tabby.ui.widgets
