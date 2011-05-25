@@ -27,11 +27,13 @@ public class TabsWidget extends Composite {
 	private TabListWidget editorsList;
 	private SelectionTransitionManager selectionManager;
 	private List<TabSelectionListener> selectionListeners = new ArrayList<TabSelectionListener>();
-
-	public TabsWidget(Composite parent, List<IWorkbenchPartReference> editors, List<IWorkbenchPartReference> views) {
-		super(parent, SWT.NONE);
+	private final IWorkbenchPartReference activePart;
+	
+	public TabsWidget(Composite parent, List<IWorkbenchPartReference> editors, List<IWorkbenchPartReference> views, IWorkbenchPartReference activePart) {
+		super(parent, SWT.BORDER);
 		this.editors = editors;
 		this.views = views;
+		this.activePart = activePart;
 		
 		initializeControls(parent);
 	}
@@ -42,7 +44,7 @@ public class TabsWidget extends Composite {
 		viewsList = new TabListWidget(this, "Views", views);
 		viewsList.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
-		LineWidget line = new LineWidget(this, LineDirection.Vertical, 50, 2, 10);
+		LineWidget line = new LineWidget(this, LineDirection.Vertical, 50, 1, 10);
 		line.setLayoutData(new GridData(SWT.CENTER, SWT.FILL, false, true));
 
 		editorsList = new TabListWidget(this, "Editors", editors);
@@ -50,7 +52,7 @@ public class TabsWidget extends Composite {
 		
 		initializeListeners();
 		
-		selectionManager = new SelectionTransitionManager(editorsList, viewsList);
+		selectionManager = new SelectionTransitionManager(activePart, editorsList, viewsList);
 	}
 
 	private void initializeListeners() {
@@ -60,7 +62,7 @@ public class TabsWidget extends Composite {
 					selectionManager.selectNext();
 				
 				if(isCtrlShiftTabPressed(e))
-					selectionManager.selectPrevious();
+					selectionManager.selectPrevious();				
 			}
 		});
 		
@@ -100,5 +102,13 @@ public class TabsWidget extends Composite {
 
 	private boolean isCtrlShiftTabPressed(KeyEvent e) {
 		return e.character == SWT.TAB && ((e.stateMask & SWT.CTRL) != 0) && ((e.stateMask & SWT.SHIFT) != 0);
+	}
+
+	public void selectNext() {
+		selectionManager.selectNext();
+	}
+
+	public void selectPrevious() {
+		selectionManager.selectPrevious();
 	}
 }

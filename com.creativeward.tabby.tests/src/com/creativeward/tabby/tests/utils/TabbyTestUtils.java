@@ -9,6 +9,7 @@ import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.internal.PartPane;
 import org.eclipse.ui.internal.WorkbenchPartReference;
 
+@SuppressWarnings("restriction")
 public class TabbyTestUtils {
 	public static List<IWorkbenchPartReference> workbenchParts(String... titles) {
 		ArrayList<IWorkbenchPartReference> results = new ArrayList<IWorkbenchPartReference>();

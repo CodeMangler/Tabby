@@ -56,6 +56,26 @@ public class TabListWidget extends Composite {
 		selectedItem.select();
 	}
 
+	public void select(IWorkbenchPartReference toSelect) {
+		if(toSelect == null)
+			return;
+		
+		clearSelection();
+		
+		for (int i = 0; i < listItems.size(); i++) {
+			TabListItemWidget listItem = listItems.get(i);
+			if(listItem.has(toSelect)) {
+				selectedIndex = i;
+				if(selectedItem != null)
+					selectedItem.deselect();
+				
+				selectedItem = listItem;
+				selectedItem.select();
+				return;
+			}			
+		}
+	}
+
 	void selectNext() {
 		selectedIndex++;
 		if(selectedItem != null)
@@ -104,8 +124,12 @@ public class TabListWidget extends Composite {
 		return selectedItem.workbenchPartReference();
 	}
 	
-	public boolean hasElements() {
-		return !listItems.isEmpty();
+	public boolean has(IWorkbenchPartReference element) {
+		return parts.contains(element);
+	}
+	
+	public boolean isEmpty() {
+		return listItems.isEmpty();
 	}
 	
 	void addSelectionRolloverListener(SelectionRolloverListener listener) {

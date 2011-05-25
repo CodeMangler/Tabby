@@ -4,20 +4,34 @@
    <extension
          point="org.eclipse.ui.bindings">
       <key
-            commandId="com.creativeward.tabby.tabSwitch"
+            commandId="com.creativeward.tabby.nextTab"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="Ctrl+Tab">
+      </key>
+      <key
+            commandId="com.creativeward.tabby.previousTab"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="Ctrl+Shift+Tab">
       </key>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
       <command
             categoryId="org.eclipse.ui.category.window"
-            defaultHandler="com.creativeward.tabby.commands.TabSwitchHandler"
+            defaultHandler="com.creativeward.tabby.commands.NextTabHandler"
             description="Switches to the last used tab, or, when held, displays a window that lists the current tabs to switch to."
-            id="com.creativeward.tabby.tabSwitch"
-            name="Switch Tab"
+            id="com.creativeward.tabby.nextTab"
+            name="Switch to next tab"
+            returnTypeId="org.eclipse.jdt.ui.commands.javaElementReference">
+      </command>
+      <command
+            categoryId="org.eclipse.ui.category.window"
+            defaultHandler="com.creativeward.tabby.commands.PreviousTabHandler"
+            description="Switches to the last used tab, or, when held, displays a window that lists the current tabs to switch to."
+            id="com.creativeward.tabby.previousTab"
+            name="Switch to previous tab"
             returnTypeId="org.eclipse.jdt.ui.commands.javaElementReference">
       </command>
    </extension>

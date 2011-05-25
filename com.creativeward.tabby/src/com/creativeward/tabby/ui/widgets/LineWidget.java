@@ -59,7 +59,6 @@ public class LineWidget extends Canvas {
 	}
 
 	public Point computeSize(int wHint, int hHint, boolean changed) {
-		Point size = getSize();
 		if(direction == LineDirection.Horizontal)
 			return new Point(length, Math.max(thickness, MIN_SIZE));
 		else 

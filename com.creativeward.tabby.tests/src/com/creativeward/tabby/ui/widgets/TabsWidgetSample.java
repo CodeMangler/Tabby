@@ -1,5 +1,6 @@
 package com.creativeward.tabby.ui.widgets;
 
+import static com.creativeward.tabby.tests.utils.TabbyTestUtils.workbenchPartReference;
 import static com.creativeward.tabby.tests.utils.TabbyTestUtils.workbenchParts;
 
 import org.eclipse.swt.SWT;
@@ -21,7 +22,8 @@ public class TabsWidgetSample {
 		
 		TabsWidget tabsWidget = new TabsWidget(composite, 
 				workbenchParts("Editor One", "Editor Two", "Editor Three"), 
-				workbenchParts("View One", "View Two", "View Three"));
+				workbenchParts("View One", "View Two", "View Three"),
+				workbenchPartReference("Editor One"));
 		tabsWidget.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
 		shell.pack();

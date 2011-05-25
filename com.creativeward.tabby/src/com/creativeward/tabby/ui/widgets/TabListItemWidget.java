@@ -45,6 +45,10 @@ public class TabListItemWidget extends Canvas {
 		return partReference;
 	}
 	
+	public boolean has(IWorkbenchPartReference element) {
+		return partReference == element;
+	}
+	
 	public Point getSize() {
 		GC gc = new GC(Display.getCurrent());
 		Point textSize = gc.textExtent(text);

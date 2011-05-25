@@ -22,11 +22,15 @@ public class TabsDialog extends Dialog {
 	private final List<IWorkbenchPartReference> views;
 	private TabsWidget tabsWidget;
 	private IWorkbenchPartReference selectedPart = null;
+	private final IWorkbenchPartReference activePart;
+	private final InitialListSelectionDirection initialDirection;
 
-	public TabsDialog(Shell parent, List<IWorkbenchPartReference> editors, List<IWorkbenchPartReference> views) {
+	public TabsDialog(Shell parent, List<IWorkbenchPartReference> editors, List<IWorkbenchPartReference> views, IWorkbenchPartReference activePart, InitialListSelectionDirection initialDirection) {
 		super(parent);
 		this.editors = editors;
 		this.views = views;
+		this.activePart = activePart;
+		this.initialDirection = initialDirection;
 		setShellStyle(SWT.NO_TRIM);
 	}
 
@@ -36,13 +40,20 @@ public class TabsDialog extends Dialog {
 	
 	protected Control createDialogArea(Composite parent) {
 		Composite composite = new Composite(parent, SWT.NONE);
-		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		GridData layoutData = new GridData(SWT.FILL, SWT.FILL, true, true);
+		layoutData.verticalIndent = -1000; // Anything over -10.. To make sure the ghost of the title bar (or whatever) is hidden..
+		composite.setLayoutData(layoutData);
 		composite.setLayout(new GridLayout(1, false));
 		
-		tabsWidget = new TabsWidget(parent, editors, views);
+		tabsWidget = new TabsWidget(parent, editors, views, activePart);
 		tabsWidget.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		initializeListeners();
+		
+		if(initialDirection == InitialListSelectionDirection.Next)
+			tabsWidget.selectNext();
+		else
+			tabsWidget.selectPrevious();
 		
 		return composite;
 	}
@@ -65,4 +76,7 @@ public class TabsDialog extends Dialog {
 	public IWorkbenchPartReference selection() {
 		return selectedPart;
 	}
+	
+	// TODO: Remove the enum, and make the commands return the proper workbenchpartreference to select, and in the proper order (from history)..
+	public enum InitialListSelectionDirection { Next, Previous }
 }
