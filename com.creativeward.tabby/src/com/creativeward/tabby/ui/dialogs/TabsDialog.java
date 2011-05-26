@@ -23,14 +23,12 @@ public class TabsDialog extends Dialog {
 	private TabsWidget tabsWidget;
 	private IWorkbenchPartReference selectedPart = null;
 	private final IWorkbenchPartReference activePart;
-	private final InitialListSelectionDirection initialDirection;
 
-	public TabsDialog(Shell parent, List<IWorkbenchPartReference> editors, List<IWorkbenchPartReference> views, IWorkbenchPartReference activePart, InitialListSelectionDirection initialDirection) {
+	public TabsDialog(Shell parent, List<IWorkbenchPartReference> editors, List<IWorkbenchPartReference> views, IWorkbenchPartReference activePart) {
 		super(parent);
 		this.editors = editors;
 		this.views = views;
 		this.activePart = activePart;
-		this.initialDirection = initialDirection;
 		setShellStyle(SWT.NO_TRIM);
 	}
 
@@ -49,12 +47,7 @@ public class TabsDialog extends Dialog {
 		tabsWidget.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		initializeListeners();
-		
-		if(initialDirection == InitialListSelectionDirection.Next)
-			tabsWidget.selectNext();
-		else
-			tabsWidget.selectPrevious();
-		
+				
 		return composite;
 	}
 
@@ -75,8 +68,5 @@ public class TabsDialog extends Dialog {
 
 	public IWorkbenchPartReference selection() {
 		return selectedPart;
-	}
-	
-	// TODO: Remove the enum, and make the commands return the proper workbenchpartreference to select, and in the proper order (from history)..
-	public enum InitialListSelectionDirection { Next, Previous }
+	}	
 }

@@ -7,8 +7,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import com.creativeward.tabby.ui.dialogs.TabsDialog.InitialListSelectionDirection;
-
 
 public class TabsDialogSample {
 	public static void main(String[] args) {
@@ -18,7 +16,7 @@ public class TabsDialogSample {
 
 		new TabsDialog(shell, 
 				workbenchParts("Editor One", "Editor Two", "Editor Three"), 
-				workbenchParts("View One", "View Two", "View Three"), workbenchPartReference("Editor One"), InitialListSelectionDirection.Next).open();
+				workbenchParts("View One", "View Two", "View Three"), workbenchPartReference("Editor One")).open();
 
 		shell.setText("Main Shell");
 		shell.pack();

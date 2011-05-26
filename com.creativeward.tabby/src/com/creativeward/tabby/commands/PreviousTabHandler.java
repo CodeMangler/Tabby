@@ -2,16 +2,17 @@ package com.creativeward.tabby.commands;
 
 import java.util.List;
 
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPartReference;
-
-import com.creativeward.tabby.ui.dialogs.TabsDialog;
-import com.creativeward.tabby.ui.dialogs.TabsDialog.InitialListSelectionDirection;
 
 public class PreviousTabHandler extends AbstractTabSwitchHandler {
 
-	protected TabsDialog createTabsDialog(Shell shell, List<IWorkbenchPartReference> editors, List<IWorkbenchPartReference> views, IWorkbenchPartReference activePart) {
-		return new TabsDialog(shell, editors, views, activePart, InitialListSelectionDirection.Previous);
+	protected IWorkbenchPartReference partToActivate(List<IWorkbenchPartReference> partReferences) {
+		IWorkbenchPartReference activePartReference = activePage().getActivePartReference();
+
+		partReferences.remove(activePartReference);
+		partReferences.add(0, activePartReference);
+		
+		return partReferences.get(partReferences.size() - 1);
 	}
 	
 }

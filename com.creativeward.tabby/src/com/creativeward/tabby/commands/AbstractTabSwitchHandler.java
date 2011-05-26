@@ -7,7 +7,6 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbenchPage;
@@ -15,6 +14,7 @@ import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
+import com.creativeward.tabby.Activator;
 import com.creativeward.tabby.ui.dialogs.TabsDialog;
 
 public abstract class AbstractTabSwitchHandler extends AbstractHandler {
@@ -24,26 +24,24 @@ public abstract class AbstractTabSwitchHandler extends AbstractHandler {
 		List<IWorkbenchPartReference> views = new ArrayList<IWorkbenchPartReference>();
 		enumerateWorkbenchParts(editors, views);
 		
-		TabsDialog dialog = createTabsDialog(Display.getDefault().getActiveShell(), editors, views, activePart());
-		IWorkbenchPartReference partToActivate = null;
+		editors = Activator.getActivationHistory().partsInActivationOrder(editors);
+		
+		TabsDialog dialog = new TabsDialog(Display.getCurrent().getActiveShell(), editors, views, partToActivate(editors));
+		IWorkbenchPartReference activatedPart = null;
 		if(dialog.open() == TabsDialog.OK) {
-			partToActivate = dialog.selection();
-			if(partToActivate == null)
+			activatedPart = dialog.selection();
+			if(activatedPart == null)
 				return null;
 			
-			activePage().activate(partToActivate.getPart(true));
+			activePage().activate(activatedPart.getPart(true));
 		}
 		
-		return partToActivate;
+		return activatedPart;
 	}
 
-	protected abstract TabsDialog createTabsDialog(Shell shell, List<IWorkbenchPartReference> editors, List<IWorkbenchPartReference> views, IWorkbenchPartReference activePart);
+	protected abstract IWorkbenchPartReference partToActivate(List<IWorkbenchPartReference> partReferences);
 
-	private IWorkbenchPartReference activePart() {
-		return activePage().getActivePartReference();
-	}
-
-	private IWorkbenchPage activePage() {
+	protected IWorkbenchPage activePage() {
 		return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 	}
 
