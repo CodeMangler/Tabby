@@ -1,11 +1,11 @@
-package com.creativeward.tabby.ui.widgets;
+package com.creativeward.tabby.ui.notifications;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.ui.IWorkbenchPartReference;
 
-import com.creativeward.tabby.ui.notifications.SelectionRolloverListener;
+import com.creativeward.tabby.ui.widgets.TabListWidget;
 
 public class SelectionTransitionManager {
 	SelectionTransition FIRST_TO_SECOND;

@@ -20,7 +20,7 @@ public class TabListWidget extends Composite {
 	private int selectedIndex = -1;
 	
 	public TabListWidget(Composite parent, String title, List<IWorkbenchPartReference> workbenchParts) {
-		super(parent, SWT.NONE);
+		super(parent, SWT.DOUBLE_BUFFERED);
 		this.parts = workbenchParts;
 		
 		initialize();
@@ -76,7 +76,7 @@ public class TabListWidget extends Composite {
 		}
 	}
 
-	void selectNext() {
+	public void selectNext() {
 		selectedIndex++;
 		if(selectedItem != null)
 			selectedItem.deselect();
@@ -93,7 +93,7 @@ public class TabListWidget extends Composite {
 		selectedItem.select();
 	}
 
-	void selectPrevious() {
+	public void selectPrevious() {
 		selectedIndex--;
 		
 		if(selectedItem != null)
@@ -111,7 +111,7 @@ public class TabListWidget extends Composite {
 		selectedItem.select();
 	}
 	
-	void clearSelection() {
+	public void clearSelection() {
 		selectedIndex = -1;
 		if(selectedItem != null)
 			selectedItem.deselect();
@@ -132,7 +132,7 @@ public class TabListWidget extends Composite {
 		return listItems.isEmpty();
 	}
 	
-	void addSelectionRolloverListener(SelectionRolloverListener listener) {
+	public void addSelectionRolloverListener(SelectionRolloverListener listener) {
 		if(listener != null)
 			selectionRolloverListeners.add(listener);
 	}

@@ -16,6 +16,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.ui.IWorkbenchPartReference;
 
+import com.creativeward.tabby.ui.notifications.SelectionTransitionManager;
 import com.creativeward.tabby.ui.notifications.TabSelectionListener;
 import com.creativeward.tabby.ui.widgets.LineWidget.LineDirection;
 
@@ -30,7 +31,7 @@ public class TabsWidget extends Composite {
 	private final IWorkbenchPartReference activePart;
 	
 	public TabsWidget(Composite parent, List<IWorkbenchPartReference> editors, List<IWorkbenchPartReference> views, IWorkbenchPartReference activePart) {
-		super(parent, SWT.BORDER);
+		super(parent, SWT.BORDER|SWT.DOUBLE_BUFFERED);
 		this.editors = editors;
 		this.views = views;
 		this.activePart = activePart;
@@ -44,8 +45,10 @@ public class TabsWidget extends Composite {
 		viewsList = new TabListWidget(this, "Views", views);
 		viewsList.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
-		LineWidget line = new LineWidget(this, LineDirection.Vertical, 50, 1, 10);
-		line.setLayoutData(new GridData(SWT.CENTER, SWT.FILL, false, true));
+		if(!views.isEmpty() && !editors.isEmpty()) {
+			LineWidget line = new LineWidget(this, LineDirection.Vertical, 50, 1, 10);
+			line.setLayoutData(new GridData(SWT.CENTER, SWT.FILL, false, true));
+		}
 
 		editorsList = new TabListWidget(this, "Editors", editors);
 		editorsList.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
