@@ -15,6 +15,12 @@
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="Ctrl+Shift+Tab">
       </key>
+      <key
+            commandId="com.creativeward.tabby.focusEditor"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="Esc">
+      </key>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -32,6 +38,14 @@
             description="Switches to the last used tab, or, when held, displays a window that lists the current tabs to switch to."
             id="com.creativeward.tabby.previousTab"
             name="Switch to previous tab"
+            returnTypeId="org.eclipse.jdt.ui.commands.javaElementReference">
+      </command>
+      <command
+            categoryId="org.eclipse.ui.category.window"
+            defaultHandler="com.creativeward.tabby.commands.FocusEditorHandler"
+            description="Moves focus to the active editor"
+            id="com.creativeward.tabby.focusEditor"
+            name="Move focus to the active editor"
             returnTypeId="org.eclipse.jdt.ui.commands.javaElementReference">
       </command>
    </extension>
