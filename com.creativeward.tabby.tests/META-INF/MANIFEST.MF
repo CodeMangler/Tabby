@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tabby Tests
 Bundle-SymbolicName: com.creativeward.tabby.tests
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.1.qualifier
 Bundle-Activator: com.creativeward.tabby.tests.Activator
 Bundle-Vendor: Creative Ward
 Require-Bundle: org.eclipse.ui,

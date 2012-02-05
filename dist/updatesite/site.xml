@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/com.creativeward.tabby.feature_1.0.0.201105280014.jar" id="com.creativeward.tabby.feature" version="1.0.0.201105280014">
+   <description name="Tabby Update Site" url="http://dharampal.in/projects/tabby/updatesite">
+      Update site for Tabby - a tab switcher for eclipse
+   </description>
+   <feature url="features/com.creativeward.tabby.feature_1.0.1.201202060052.jar" id="com.creativeward.tabby.feature" version="1.0.1.201202060052">
       <category name="com.creativeward.tabby"/>
    </feature>
    <category-def name="com.creativeward.tabby" label="Tabby"/>
